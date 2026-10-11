@@ -1,0 +1,285 @@
+<?xml version="1.0"?>
+<robot name="xwdc">
+    
+    
+    
+    <!-- cheti-->
+    <link name="cheti">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>   
+            <geometry>
+                <box size="0.3 0.16 0.07"/>
+            </geometry>
+            <material name="green">    
+               <color rgba="0 1 0 1"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <box size="0.3 0.16 0.07"/>
+            </geometry> 
+        </collision>
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="1.2"/> 
+            <inertia ixx="0.00305" ixy="0" ixz="0" iyy="0.00949" iyz="0" izz="0.01156"/>
+        </inertial>
+    </link>
+        
+    
+    
+    
+    
+    
+    
+    <link name="zuoqianlun">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <cylinder radius="0.04" length="0.03" />
+            </geometry>
+            <material name="blue">
+                <color rgba="0 0 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>   
+            <geometry>
+                <cylinder radius="0.04" length="0.03"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/> 
+            <mass value="0.2"/> 
+            <inertia ixx="0.000095" ixy="0" ixz="0" iyy="0.000095" iyz="0" izz="0.00016"/>
+        </inertial>
+    </link>
+
+
+
+
+    <link name="youqianlun">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry><cylinder radius="0.04" length="0.03"/></geometry>
+            <material name="blue"><color rgba="0 0 1 1"/></material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry><cylinder radius="0.04" length="0.03"/></geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="0.2"/>
+            <inertia ixx="0.000095" ixy="0" ixz="0" iyy="0.000095" iyz="0" izz="0.00016"/>
+        </inertial>
+    </link>
+
+
+
+
+
+    <link name="zuohoulun">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <cylinder radius="0.04" length="0.03" />
+            </geometry>
+            <material name="blue">
+                <color rgba="0 0 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>   
+            <geometry>
+                <cylinder radius="0.04" length="0.03"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/> 
+            <mass value="0.2"/> 
+            <inertia ixx="0.000095" ixy="0" ixz="0" iyy="0.000095" iyz="0" izz="0.00016"/>
+        </inertial>
+    </link>
+
+
+
+
+    <link name="youhoulun">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0" />
+            <geometry>
+                <cylinder radius="0.04" length="0.03" />
+            </geometry>
+            <material name="blue">
+                <color rgba="0 0 1 1" />
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>   
+            <geometry>
+                <cylinder radius="0.04" length="0.03"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/> 
+            <mass value="0.2"/> 
+            <inertia ixx="0.000095" ixy="0" ixz="0" iyy="0.000095" iyz="0" izz="0.00016"/>
+        </inertial>
+    </link>
+
+
+    <!-- guanjie-->
+    <joint name="zuoqianlun_joint" type="continuous">
+        <parent link="cheti"/>
+        <child link="zuoqianlun"/>
+        <origin xyz="0.10 0.095 -0.075" rpy="1.5708 0 0"/>
+        <axis xyz="0 0 1"/>
+    </joint>
+
+    <joint name="youqianlun_joint" type="continuous">
+        <parent link="cheti"/>
+        <child link="youqianlun"/>
+        <origin xyz="0.10 -0.095 -0.075" rpy="1.5708 0 0"/>
+        <axis xyz="0 0 1"/>
+    </joint>
+
+
+
+    <joint name="zuohoulun_joint" type="continuous">
+        <parent link="cheti"/>
+        <child link="zuohoulun"/>
+        <origin xyz="-0.10 0.095 -0.075" rpy="1.5708 0 0"/>
+        <axis xyz="0 0 1"/>
+    </joint>
+
+
+
+    <joint name="youhoulun_joint" type="continuous">
+        <parent link="cheti"/>
+        <child link="youhoulun"/>
+        <origin xyz="-0.10 -0.095 -0.075" rpy="1.5708 0 0"/>
+        <axis xyz="0 0 1"/>
+    </joint>
+    
+
+
+
+
+
+
+
+
+
+    <!-- jia ru gazebo chajian-->
+    <gazebo>
+        <plugin name="diff_drive" filename="libgazebo_ros_diff_drive.so"><!--只需要基本的差速 -->
+            <update_rate>70</update_rate>
+
+        <left_joint>zuohoulun_joint</left_joint>
+        <right_joint>youhoulun_joint</right_joint>
+
+        <wheel_separation>0.19</wheel_separation><!--轮间距 -->
+        <wheel_diameter>0.08</wheel_diameter><!--轮直径-->
+
+        <max_wheel_torque>20</max_wheel_torque><!--最大扭矩-->
+        <max_wheel_acceleration>5.0</max_wheel_acceleration><!--轮子最大角加速度-->
+
+        <command_topic>cmd_vel</command_topic> <!--订阅的速度话题名称 -->
+        <odometry_topic>odom</odometry_topic><!--发布里程计数据到哪里-->
+        <odometry_frame>odom</odometry_frame><!--里程计的父系坐标名称？？？？-->
+        <robot_base_frame>cheti</robot_base_frame><!--车子的基座坐标名称 -->
+        <publish_odom>false</publish_odom>
+        <publish_odom_tf>false</publish_odom_tf>
+        <publish_wheel_tf>true</publish_wheel_tf>
+        </plugin>
+        <plugin name="joint_state" filename="libgazebo_ros_joint_state_publisher.so">
+            <update_rate>30</update_rate>
+            <joint_name>zuoqianlun_joint</joint_name>
+            <joint_name>youqianlun_joint</joint_name>
+            <joint_name>zuohoulun_joint</joint_name>
+            <joint_name>youhoulun_joint</joint_name>
+        </plugin>
+    </gazebo>
+    
+
+
+
+
+
+    <!-- 加入激光雷达 nb-->
+    
+    <link name="leida_link">
+        <visual>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <cylinder radius="0.03" length="0.04"/>
+            </geometry>
+            <material name="black">
+                <color rgba="0 0 0 1"/>
+            </material>
+        </visual>
+        <collision>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <geometry>
+                <cylinder radius="0.03" length="0.04"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <origin xyz="0 0 0" rpy="0 0 0"/>
+            <mass value="0.1"/>
+            <inertia ixx="0.00003583" ixy="0" ixz="0" iyy="0.00003583" iyz="0" izz="0.000045"/>
+        </inertial>
+    </link> 
+    <joint name="jiguangleida_joint" type="fixed">
+        <parent link="cheti"/>
+        <child link="leida_link"/>
+        <origin xyz="0 0 0.06" rpy="0 0 0"/>
+    </joint>
+    
+    <gazebo reference="leida_link">
+        <sensor type="ray" name="leidachuanganqi">
+            <pose>0 0 0 0 0 0</pose>
+            <visualize>true</visualize>
+            <update_rate>20</update_rate>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>360</samples> <!-- 180度打多少射线-->
+                        <resolution>1</resolution>
+                        <min_angle>-3.14159</min_angle><!--开始角度 -->
+                        <max_angle>3.14159</max_angle><!--终止角度 ，半圈-->
+                    </horizontal>
+                </scan>
+                <range>
+                        <min>0.1</min>
+                        <max>10.0</max>
+                </range>    
+                
+            </ray>       
+            <plugin name="jiguangchuanganqi" filename="libgazebo_ros_ray_sensor.so">
+                    <ros>
+                        <remapping>~/out:=scan</remapping><!-- 输出调整到scan话题-->
+                    </ros>
+                        <output_type>sensor_msgs/LaserScan</output_type><!-- 输出数据的类型-->
+                        <frame_name>leida_link</frame_name><!-- 输出数据的坐标系-->
+                    
+             </plugin>     
+        </sensor>
+    </gazebo>
+
+
+<!-- 我去！！！！！原来问题在这？？？怎么还有个摩擦力阿-->
+
+    <gazebo reference="zuoqianlun">
+        <mu1>0.05</mu1>
+        <mu2>0.05</mu2>
+    </gazebo>
+    <gazebo reference="youqianlun">
+        <mu1>0.05</mu1>
+        <mu2>0.05</mu2>
+    </gazebo>
+
+
+</robot>
